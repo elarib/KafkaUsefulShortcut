@@ -2,16 +2,12 @@
 
 source $(dirname $0)/config.sh
 
-if [ "$am_i_cool" = true ]; then
+if [ $1 ]; then
 
-    if [ $1 ]; then
+    $_KAFKA_BIN/kafka-topics --zookeeper $_KAFKA_ZOOKEEPER --list | grep $1
 
-        $_KAFKA_BIN/kafka-topics --zookeeper $_KAFKA_ZOOKEEPER --list | grep $1
+else
 
-    else
-
-        $_KAFKA_BIN/kafka-topics --zookeeper $_KAFKA_ZOOKEEPER --list
-
-    fi
+    $_KAFKA_BIN/kafka-topics --zookeeper $_KAFKA_ZOOKEEPER --list
 
 fi
