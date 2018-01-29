@@ -7,14 +7,25 @@
 
 variableToCheck=(_KAFKA_BIN _KAFKA_BOOTSTRAP_SERVERS _KAFKA_ZOOKEEPER)
 
-am_i_cool=true
-
 for env_var in "${variableToCheck[@]}"
 do
    :
     if [ -z "${!env_var}" ]; then
         echo "You should specify ${env_var} env variable "
-        am_i_cool=false
+        exit 1
     fi
 done
 
+
+# TODO Use this
+function checkArgument()
+{
+    for arg in $arg_waited
+    do
+        if [[ -z "${!arg}" ]]; then
+            echo "Must provide the name of topic to delete as $arg argument "
+            exit 1
+        fi
+    done
+
+}
